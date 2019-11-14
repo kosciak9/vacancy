@@ -1,0 +1,42 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "graphql server for vacancy",
+  "main": "index.js",
+  "author": "kosciak9",
+  "dependencies": {
+    "@types/koa": "^2.0.52",
+    "apollo-server-koa": "^2.9.7",
+    "bcrypt": "^3.0.6",
+    "cabin": "^5.0.8",
+    "date-fns": "^2.7.0",
+    "graphql": "^14.5.8",
+    "jsonwebtoken": "^8.5.1",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-jwt": "^3.6.0",
+    "koa-router": "^7.4.0",
+    "lodash": "^4.17.15",
+    "nodemon": "^1.19.4",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^4.1.0",
+    "ts-node": "^8.5.0",
+    "type-graphql": "^0.17.5",
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.20",
+    "typeorm-typedi-extensions": "^0.2.3",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "eslint": "eslint src/index.ts",
+    "build": "tsc",
+    "start": "nodemon",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.5.0",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "eslint": "^6.6.0"
+  }
+}

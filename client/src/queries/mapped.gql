@@ -1,0 +1,9 @@
+query Mapped($date: String!) {
+  mapped(startDate: $date) {
+    id
+    from
+    to
+    available
+    uncertain
+  }
+}

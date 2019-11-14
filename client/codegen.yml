@@ -1,0 +1,19 @@
+overwrite: true
+schema: "../server/schema.gql"
+documents: "src/{queries,mutations}/*.gql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      # - "typescript-document-nodes"
+      - "fragment-matcher"
+    config:
+      preResolveTypes: true 
+      withHooks: true
+      withHOC: false
+      withComponent: false
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
