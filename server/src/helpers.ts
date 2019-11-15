@@ -1,4 +1,4 @@
-import { Column, ColumnOptions, getRepository } from "typeorm";
+import { getRepository } from "typeorm";
 
 import Organization from "entities/Organization";
 import Template from "entities/Template";
@@ -26,16 +26,34 @@ export async function seedDatabase() {
   await organizationRepository.save(defaultOrg);
   defaultUser.organization = defaultOrg;
   await userRepository.save(defaultUser);
-  const templates = templateRepository.create([
-    {
-      fromHours: 8,
-      fromMinutes: 30,
-      toHours: 10,
-      toMinutes: 0,
-      weekday: 1,
-      organization: defaultOrg
+  const templates = [];
+  let fromHours = 8;
+  let fromMinutes = 30;
+  let toHours = 10;
+  let toMinutes = 0;
+  for (let weekday = 1; weekday < 8; weekday++) {
+    fromHours = 8;
+    fromMinutes = 30;
+    toHours = 10;
+    toMinutes = 0;
+    for (let i = 0; i < 10; i++) {
+      const t = templateRepository.create({
+        fromHours,
+        fromMinutes,
+        toHours,
+        toMinutes,
+        weekday,
+        organization: defaultOrg
+      });
+      templates.push(t);
+      // iterator: 1h30min
+      fromMinutes = (fromMinutes + 30) % 60;
+      fromHours += fromMinutes === 0 ? 2 : 1;
+      toMinutes = (toMinutes + 30) % 60;
+      toHours += toMinutes === 0 ? 2 : 1;
     }
-  ]);
+  }
+  templateRepository.create(templates);
   await templateRepository.save(templates);
 
   return { defaultUser };

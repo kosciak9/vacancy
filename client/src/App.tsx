@@ -3,6 +3,7 @@ import { Link, BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import PersonalView from "PersonalView";
 import OrganizationView from "OrganizationView";
 import LoginView from "LoginView";
+import TemplateView from "TemplateView";
 
 const App: React.FC = () => {
   const [loggedIn, setLoggedIn] = useState(true);
@@ -12,6 +13,7 @@ const App: React.FC = () => {
         <nav>
           <Link to="/">Availability</Link>
           <Link to="/organization">Organization</Link>
+          <Link to="/settings">Settings</Link>
           <button
             onClick={() => {
               localStorage.removeItem("token");
@@ -24,6 +26,10 @@ const App: React.FC = () => {
       </header>
       <main>
         <Switch>
+          <Route path="/settings">
+            <TemplateView />
+            <span>test</span>
+          </Route>
           <Route path="/organization">
             <OrganizationView />
           </Route>

@@ -1,21 +1,21 @@
 version: "3.5"
 
 services:
-  vacancy-backend:
+  vacancy_backend:
     build: .
     volumes:
       - ./:/app
     ports:
-      - 3001:3000
+      - 3001:3001
     environment:
-      - DB_HOST: "vacancy-db"
-      - DB_NAME: "vacancy"
-      - DB_USER: "vacancy"
-      - DB_PASS: "hunter2"
+      DB_HOST: vacancy_db
+      DB_NAME: vacancy
+      DB_USER: vacancy
+      DB_PASS: hunter2
     links:
-      - database
-    command: ["yarn", "start"]
-  vacancy-db:
+      - vacancy_db
+    command: ["yarn", "prod"]
+  vacancy_db:
     image: postgres:latest
     volumes:
       - vacancy-db:/var/lib/postgresql/data

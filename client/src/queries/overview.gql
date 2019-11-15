@@ -1,0 +1,13 @@
+query overview($date: String!) {
+  overview(startDate: $date) {
+    id
+    from
+    to
+    available
+    uncertain
+    user {
+      id
+      name
+    }
+  }
+}

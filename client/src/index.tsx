@@ -7,6 +7,17 @@ import App from "App";
 import * as React from "react";
 import * as serviceWorker from "./serviceWorker";
 
+import Typography from "typography";
+
+const typography = new Typography({
+  baseFontSize: "16px",
+  baseLineHeight: 1.45,
+  headerFontFamily: ["Cabin", "sans-serif"],
+  bodyFontFamily: ["Cabin", "sans-serif"]
+});
+
+typography.injectStyles();
+
 const ReactDOM = require("react-dom");
 
 const httpLink = createHttpLink({

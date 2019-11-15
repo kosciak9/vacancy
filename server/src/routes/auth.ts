@@ -13,8 +13,6 @@ const authRoute = async (ctx: DefaultContext) => {
 
   const user = await userRepository.findOne({ where: { email } });
 
-  console.log(email, password);
-
   if (user && (await compare(password, user.password))) {
     const payload = { sub: user.id };
     const token = jwt.sign(payload, secret);

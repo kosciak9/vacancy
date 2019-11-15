@@ -12,6 +12,7 @@ export type Scalars = {
 };
 
 export type AddAvailabilityInput = {
+  id: Scalars['String'],
   from: Scalars['String'],
   to: Scalars['String'],
   available: Scalars['Boolean'],
@@ -37,11 +38,17 @@ export type Availability = {
 export type Mutation = {
    __typename?: 'Mutation',
   addAvailability: Availability,
+  changeAvailability: Availability,
   addTemplate: Template,
 };
 
 
 export type MutationAddAvailabilityArgs = {
+  data: AddAvailabilityInput
+};
+
+
+export type MutationChangeAvailabilityArgs = {
   data: AddAvailabilityInput
 };
 
@@ -108,6 +115,18 @@ export type MappedQueryVariables = {
 
 export type MappedQuery = { __typename?: 'Query', mapped: Maybe<Array<{ __typename?: 'Availability', id: string, from: string, to: string, available: boolean, uncertain: boolean }>> };
 
+export type OverviewQueryVariables = {
+  date: Scalars['String']
+};
+
+
+export type OverviewQuery = { __typename?: 'Query', overview: Array<{ __typename?: 'Availability', id: string, from: string, to: string, available: boolean, uncertain: boolean, user: { __typename?: 'User', id: string, name: string } }> };
+
+export type TemplatesQueryVariables = {};
+
+
+export type TemplatesQuery = { __typename?: 'Query', templates: Maybe<Array<{ __typename?: 'Template', id: string, fromHours: number, fromMinutes: number, toHours: number, toMinutes: number, weekday: number }>> };
+
 
 export const MappedDocument = gql`
     query Mapped($date: String!) {
@@ -146,6 +165,84 @@ export function useMappedLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookO
 export type MappedQueryHookResult = ReturnType<typeof useMappedQuery>;
 export type MappedLazyQueryHookResult = ReturnType<typeof useMappedLazyQuery>;
 export type MappedQueryResult = ApolloReactCommon.QueryResult<MappedQuery, MappedQueryVariables>;
+export const OverviewDocument = gql`
+    query overview($date: String!) {
+  overview(startDate: $date) {
+    id
+    from
+    to
+    available
+    uncertain
+    user {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useOverviewQuery__
+ *
+ * To run a query within a React component, call `useOverviewQuery` and pass it any options that fit your needs.
+ * When your component renders, `useOverviewQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOverviewQuery({
+ *   variables: {
+ *      date: // value for 'date'
+ *   },
+ * });
+ */
+export function useOverviewQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<OverviewQuery, OverviewQueryVariables>) {
+        return ApolloReactHooks.useQuery<OverviewQuery, OverviewQueryVariables>(OverviewDocument, baseOptions);
+      }
+export function useOverviewLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<OverviewQuery, OverviewQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<OverviewQuery, OverviewQueryVariables>(OverviewDocument, baseOptions);
+        }
+export type OverviewQueryHookResult = ReturnType<typeof useOverviewQuery>;
+export type OverviewLazyQueryHookResult = ReturnType<typeof useOverviewLazyQuery>;
+export type OverviewQueryResult = ApolloReactCommon.QueryResult<OverviewQuery, OverviewQueryVariables>;
+export const TemplatesDocument = gql`
+    query templates {
+  templates {
+    id
+    fromHours
+    fromMinutes
+    toHours
+    toMinutes
+    weekday
+  }
+}
+    `;
+
+/**
+ * __useTemplatesQuery__
+ *
+ * To run a query within a React component, call `useTemplatesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTemplatesQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTemplatesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTemplatesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TemplatesQuery, TemplatesQueryVariables>) {
+        return ApolloReactHooks.useQuery<TemplatesQuery, TemplatesQueryVariables>(TemplatesDocument, baseOptions);
+      }
+export function useTemplatesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TemplatesQuery, TemplatesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<TemplatesQuery, TemplatesQueryVariables>(TemplatesDocument, baseOptions);
+        }
+export type TemplatesQueryHookResult = ReturnType<typeof useTemplatesQuery>;
+export type TemplatesLazyQueryHookResult = ReturnType<typeof useTemplatesLazyQuery>;
+export type TemplatesQueryResult = ApolloReactCommon.QueryResult<TemplatesQuery, TemplatesQueryVariables>;
 
       export interface IntrospectionResultData {
         __schema: {

@@ -17,16 +17,16 @@ export default async cabin => {
   try {
     // create TypeORM connection
     await TypeORM.createConnection({
-      type: "sqlite",
-      // host: DB_HOST,
+      type: "postgres",
+      host: DB_HOST,
       database: DB_NAME,
-      // username: DB_USER,
-      // password: DB_PASS,
-      // port: 5432,
+      username: DB_USER,
+      password: DB_PASS,
+      port: 5432,
       entities,
       synchronize: true,
-      // logger: "advanced-console",
-      logger: "simple-console",
+      logger: "advanced-console",
+      // logger: "simple-console",
       // logging: "",
       dropSchema: true,
       cache: true

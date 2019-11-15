@@ -1,0 +1,10 @@
+query templates {
+  templates {
+    id
+    fromHours
+    fromMinutes
+    toHours
+    toMinutes
+    weekday
+  }
+}

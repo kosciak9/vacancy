@@ -124,12 +124,11 @@ export default class AvailabilityResolver {
           available: false,
           uncertain: false
         });
-        await this.availabilityRepository.save(availability);
       }
       availabilities.push(availability);
     }
 
-    console.log(availabilities);
+    await this.availabilityRepository.save(availabilities);
     return availabilities;
   }
 
